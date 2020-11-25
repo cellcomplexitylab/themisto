@@ -1,30 +1,28 @@
-FROM ubuntu:20.04
-
-# RStudio Server version
-ARG RSTUDIO=1.3.959
-
-# Disable Prompt During Packages Installation
-ARG DEBIAN_FRONTEND=noninteractive
+FROM rocker/rstudio:3.6.3
 
 RUN apt-get update && apt-get install -y \
-    build-essential \
-    gdebi-core \
-    python-dev \
+    python3 \
+    python3-dev \
     python3-pip \
-    r-base=3* \
-    wget
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Install Jupyter
+RUN pip3 -q install --upgrade pip && pip -q install jupyter
 
 # Set Python 3 as default (over Python 2).
 RUN update-alternatives --install \
     /usr/bin/python python /usr/bin/python3 10
 
-# Install Jupyter
-RUN pip3 -q install --upgrade pip && pip3 install jupyter
+# Jupyter setup
+RUN mkdir -p /home/rstudio/notebook && chown rstudio:rstudio /home/rstudio/notebook \
+    && mkdir -p /etc/services.d/notebook \
+    && echo "#!/usr/bin/with-contenv bash \
+        \nexec s6-setuidgid rstudio /usr/local/bin/jupyter-notebook --no-browser --port=8888 --ip=0.0.0.0 --NotebookApp.token='' --notebook-dir=/home/rstudio/notebook" \
+        > /etc/services.d/notebook/run
 
-# Install RStudio
-RUN wget -q https://download2.rstudio.org/server/bionic/amd64/rstudio-server-${RSTUDIO}-amd64.deb \
-    && gdebi --non-interactive rstudio-server-${RSTUDIO}-amd64.deb
+# Network port for Jupyter
+EXPOSE 8888
+ENV HOME=/home/rstudio
+WORKDIR /home/rstudio
 
-# Clean up after installation
-RUN apt-get clean && rm -rf /var/lib/apt/lists/* \
-    && rm rstudio-server-${RSTUDIO}-amd64.deb
+CMD ["/init"]
