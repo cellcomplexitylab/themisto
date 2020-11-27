@@ -13,16 +13,17 @@ RUN pip3 -q install --upgrade pip && pip -q install jupyter
 RUN update-alternatives --install \
     /usr/bin/python python /usr/bin/python3 10
 
+ENV HOME=/home/cclab
+ENV USER=cclab
+
 # Jupyter setup
-RUN mkdir -p /home/rstudio/notebook && chown rstudio:rstudio /home/rstudio/notebook \
-    && mkdir -p /etc/services.d/notebook \
+RUN mkdir -p /etc/services.d/notebook \
     && echo "#!/usr/bin/with-contenv bash \
-        \nexec s6-setuidgid rstudio /usr/local/bin/jupyter-notebook --no-browser --port=8888 --ip=0.0.0.0 --NotebookApp.token='' --notebook-dir=/home/rstudio/notebook" \
+        \nmkdir -p ${HOME}/notebook && chown ${USER}:${USER} ${HOME}/notebook \
+        \nexec s6-setuidgid ${USER} /usr/local/bin/jupyter-notebook --no-browser --port=8888 --ip=0.0.0.0 --NotebookApp.token='' --notebook-dir=${HOME}/notebook" \
         > /etc/services.d/notebook/run
 
 # Network port for Jupyter
 EXPOSE 8888
-ENV HOME=/home/rstudio
-WORKDIR /home/rstudio
 
 CMD ["/init"]
