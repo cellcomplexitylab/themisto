@@ -13,6 +13,14 @@ RUN pip3 -q install --upgrade pip && pip -q install jupyter
 RUN update-alternatives --install \
     /usr/bin/python python /usr/bin/python3 10
 
+RUN useradd cclab \
+   && echo "cclab:cclab" | chpasswd \
+   && mkdir /home/cclab \
+   && mkdir /home/cclab/rstudio \
+   && mkdir /home/cclab/notebook \
+   && chown cclab:cclab /home/cclab \
+   && addgroup cclab staff
+
 ENV HOME=/home/cclab
 ENV USER=cclab
 
