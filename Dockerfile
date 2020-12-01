@@ -18,6 +18,7 @@ RUN useradd cclab \
    && mkdir /home/cclab \
    && mkdir /home/cclab/rstudio \
    && mkdir /home/cclab/notebook \
+   && mkdir /home/cclab/share \
    && chown cclab:cclab /home/cclab \
    && addgroup cclab staff
 
