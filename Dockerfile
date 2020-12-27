@@ -7,7 +7,12 @@ RUN apt-get update && apt-get install -y \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install Jupyter
-RUN pip3 -q install --upgrade pip && pip -q install jupyter
+RUN pip3 -q install --upgrade pip && pip3 -q install jupyter
+
+# Install scipy (which required numpy, matplotlib, ipython, jupyter, pandas, sympy and nose), 
+# scikit-bio (which required numpy) and biopython
+RUN pip3 -q install numpy scipy matplotlib ipython pandas sympy nose \
+    && pip3 install scikit-bio biopython
 
 # Set Python 3 as default (over Python 2).
 RUN update-alternatives --install \
