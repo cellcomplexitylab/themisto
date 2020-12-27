@@ -5,6 +5,10 @@
 The docker image specified in the `Dockerfile` allows you to run RStudio and
 Jupyter Notebook in a browser.
 
+Once the container is running (see below), enter the URL ```localhost:8787```
+in your browser to get access to RStudio and ```localhost:8888``` for Jupyter
+notebook. 
+
 ### Clone the repository
 
 Assuming you `git` is installed on your computer, you can clone the repository
@@ -26,8 +30,8 @@ on your computer, you can build the image with the command below.
 docker build -t themisto:1.0 .
 ```
 
-The image is called `themisto` version `1.0` for internal purposes, but
-you can replace it with any other name and any other version number.
+The image is called `themisto` version `1.0` for internal purposes, but you
+can replace it with any other name and any other version number.
 
 ## Common running options
 
@@ -39,20 +43,17 @@ in your browser from any directory with the command below.
 docker run --rm -v $(pwd):/home/cclab/share -p 8787:8787 -p 8888:8888 -e DISABLE_AUTH=true themisto:1.0
 ```
 
-Enter the URL ```localhost:8787``` in your browser to get access to
-RStudio and ```localhost:8888``` for Jupyter notebook. The directory
-from where you started `themisto` on the host is mapped to the
-directory `/home/cclab/share` on the virtual machine. All the files
-in this directory will be accessible to RStudio and Jupyter, and
+The directory from where you started `themisto` on the host is mapped
+to the directory `/home/cclab/share` on the virtual machine. All the
+files in this directory will be accessible to RStudio and Jupyter, and
 reciprocally, all the outputs of Rstudio and Jupyter saved in this
-directory will remain when the virtual machine is stopped (the
-others will be destroyed).
+directory will remain when the virtual machine is stopped (the others
+will be destroyed).
 
 To shutdown the virtual machine, enter `Ctrl-C` in the terminal
 window or close the terminal.
 
-**Explanation of the options:**
-
+_Explanation of the options:_  
    `--rm`: remove the container upon exit  
    `-v $(pwd):/home/cclab/share`: map the current directory to
 `/home/cclab/share` on the virtual machine  
@@ -91,7 +92,6 @@ below.
 docker stop themisto
 ```
 
-**Explanation of the options:**
-
-   `--name themisto`: call container themisto
+_Explanation of the options:_  
+   `--name themisto`: call container themisto  
    `-d`: detach (run in the background).  
