@@ -44,7 +44,7 @@ Once the image is built, you can start the Rstudio and Jupyter services
 in your browser from any directory with the command below.
 
 ```bash
-docker run --rm -v $(pwd):/home/cclab/share -p 8787:8787 -p 8888:8888 -e DISABLE_AUTH=true themisto:1.0
+docker run --rm -v $(pwd):/home/cclab/share -p 127.0.0.1:8787:8787 -p 127.0.0.1:8888:8888 -e DISABLE_AUTH=true themisto:1.0
 ```
 
 The directory from where you started `themisto` on the host is mapped
@@ -61,8 +61,7 @@ _Explanation of the options:_
    `--rm`: remove the container upon exit  
    `-v $(pwd):/home/cclab/share`: map the current directory to
 `/home/cclab/share` on the virtual machine  
-   `-p 8787:8787`: expose port 8787 of the virtual machine to port
-8787 of the host  
+   `-p 8787:8787`: expose port 8787 of the virtual machine to port 8787 of the localhost  
    `-e DISABLE_AUTH=true`: required to run RStudio.
 
 ### Running the container with a different shared volume
@@ -75,7 +74,7 @@ If you want to share the directory `/home/user` on the host, you can
 start the virtual machine with the command below.
 
 ```bash
-docker run --rm -v /home/user:/home/cclab/share -p 8787:8787 -p 8888:8888 -e DISABLE_AUTH=true themisto:1.0
+docker run --rm -v /home/user:/home/cclab/share -p 127.0.0.1:8787:8787 -p 127.0.0.1:8888:8888 -e DISABLE_AUTH=true themisto:1.0
 ```
 
 ### Running the container in the background
@@ -89,7 +88,7 @@ You can start the virtual machine in the background by running
 the command below.
 
 ```bash
-docker run --name themisto --rm -dv /home/user:/home/cclab/share -p 8787:8787 -p 8888:8888 -e DISABLE_AUTH=true themisto:1.0
+docker run --name themisto --rm -dv /home/user:/home/cclab/share -p 127.0.0.1:8787:8787 -p 127.0.0.1:8888:8888 -e DISABLE_AUTH=true themisto:1.0
 ```
 
 You can shut down the virtual machine by running the command
