@@ -1,5 +1,7 @@
 # Docker container for RStudio & Jupyter Notebook
 
+[![Build Status](https://github.com/yipryan2/dockerfiles-1/workflows/CCLab-CI/badge.svg?branch=main)](https://github.com/yipryan2/dockerfiles-1/actions)
+
 ## Quickstart
 
 The docker image specified in the `Dockerfile` allows you to run RStudio and

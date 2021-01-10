@@ -24,7 +24,7 @@ RUN useradd cclab \
    && mkdir /home/cclab/rstudio \
    && mkdir /home/cclab/notebook \
    && mkdir /home/cclab/share \
-   && chown cclab:cclab /home/cclab \
+   && chown -R cclab:cclab /home/cclab \
    && addgroup cclab staff
 
 ENV HOME=/home/cclab
@@ -33,8 +33,7 @@ ENV USER=cclab
 # Jupyter setup
 RUN mkdir -p /etc/services.d/notebook \
     && echo "#!/usr/bin/with-contenv bash \
-        \nmkdir -p ${HOME}/notebook && chown ${USER}:${USER} ${HOME}/notebook \
-        \nexec s6-setuidgid ${USER} /usr/local/bin/jupyter-notebook --no-browser --port=8888 --ip=0.0.0.0 --NotebookApp.token='' --notebook-dir=${HOME}/notebook" \
+        \nexec s6-setuidgid ${USER} /usr/local/bin/jupyter-notebook --no-browser --port=8888 --ip=0.0.0.0 --NotebookApp.token='' --notebook-dir=${HOME}" \
         > /etc/services.d/notebook/run
 
 # Network port for Jupyter
