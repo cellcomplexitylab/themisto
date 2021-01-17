@@ -1,6 +1,6 @@
 # Docker container for RStudio & Jupyter Notebook
 
-[![Build Status](https://github.com/yipryan2/dockerfiles-1/workflows/CCLab-CI/badge.svg?branch=main)](https://github.com/yipryan2/dockerfiles-1/actions)
+[![Build Status](https://github.com/cellcomplexitylab/dockerfiles/workflows/CCLab-CI/badge.svg)](https://github.com/cellcomplexitylab/dockerfiles/actions)
 
 ## Quickstart
 
