@@ -49,6 +49,9 @@ in your browser from any directory with the command below.
 docker run --rm -v $(pwd):/home/cclab/share -p 127.0.0.1:8787:8787 -p 127.0.0.1:8888:8888 -e DISABLE_AUTH=true themisto:1.0
 ```
 
+Once the machine is running, you can use Rstudio (http://localhost:8888)
+and Jupter (http://localhost:8787) in your browser.
+
 The directory from where you started `themisto` on the host is mapped
 to the directory `/home/cclab/share` on the virtual machine. All the
 files in this directory will be accessible to RStudio and Jupyter, and
