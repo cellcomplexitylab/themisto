@@ -4,10 +4,11 @@ RUN apt-get update && apt-get install -y \
     python3 \
     python3-dev \
     python3-pip \
-    && apt-get clean && rm -rf /var/lib/apt/lists/*
+    && apt-get clean && rm -rf /var/lib/apt/lists/* \
+    && pip3 -q install --upgrade pip
 
 # Install Jupyter
-RUN pip3 -q install --upgrade pip && pip3 -q install jupyter
+RUN pip3 -q install jupyter
 
 # Install scipy (which required numpy, matplotlib, ipython, jupyter, pandas, sympy and nose), 
 # scikit-bio (which required numpy) and biopython
