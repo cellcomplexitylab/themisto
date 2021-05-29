@@ -16,26 +16,26 @@ notebook.
 Assuming you `git` is installed on your computer, you can clone the repository
 with the command below.
 
-```bash
-git clone https://github.com/cellcomplexitylab/dockerfiles
+```
+git clone https://github.com/cellcomplexitylab/themisto
 ```
 
 ### Building the image
 
 Change directory to the git repository.
 
-```bash
-cd dockerfiles
+```
+cd themisto
 ```
 
 Assuming that `docker` is installed
 on your computer, you can build the image with the command below.
 
-```bash
+```
 docker build -t themisto:1.0 .
 ```
 
-The image is called `themisto` version `1.0` for internal purposes, but you
+The image is called `themisto` version `1.0` in this example, but you
 can replace it with any other name and any other version number.
 
 ## Common running options
@@ -45,7 +45,7 @@ can replace it with any other name and any other version number.
 Once the image is built, you can start the Rstudio and Jupyter services
 in your browser from any directory with the command below.
 
-```bash
+```
 docker run --rm -v $(pwd):/home/cclab/share -p 127.0.0.1:8787:8787 -p 127.0.0.1:8888:8888 -e DISABLE_AUTH=true themisto:1.0
 ```
 
@@ -78,7 +78,7 @@ the converse is also true, it is recommended to use only
 If you want to share the directory `/home/user` on the host, you can
 start the virtual machine with the command below.
 
-```bash
+```
 docker run --rm -v /home/user:/home/cclab/share -p 127.0.0.1:8787:8787 -p 127.0.0.1:8888:8888 -e DISABLE_AUTH=true themisto:1.0
 ```
 
@@ -92,14 +92,14 @@ more easily.
 You can start the virtual machine in the background by running
 the command below.
 
-```bash
+```
 docker run --name themisto --rm -dv /home/user:/home/cclab/share -p 127.0.0.1:8787:8787 -p 127.0.0.1:8888:8888 -e DISABLE_AUTH=true themisto:1.0
 ```
 
 You can shut down the virtual machine by running the command
 below.
 
-```bash
+```
 docker stop themisto
 ```
 
